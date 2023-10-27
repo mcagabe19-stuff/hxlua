@@ -30,32 +30,25 @@ class Main
 
 	private static function average(l:cpp.RawPointer<Lua_State>):Int
 	{
-		var n:Int = Lua.gettop(l);
-		var sum:Float = 0;
+		var sum:Float = 0.0;
+
+		final n:Int = Lua.gettop(l);
 
 		/* loop through each argument */
 		for (i in 0...n)
 		{
 			if (Lua.isnumber(l, i + 1) != 1)
-			{
-				Lua.pushstring(l, "Incorrect argument to 'average'");
-				Lua.error(l);
-			}
+				LuaL.error(l, "Incorrect argument to 'average'", []);
 
 			/* total the arguments */
 			sum += Lua.tonumber(l, i + 1);
 		}
 
-		/* clear the stack */
-		Lua.pop(l, n);
+		Lua.pop(l, n); /* clear the stack */
 
-		/* push the average */
-		Lua.pushnumber(l, sum / n);
+		Lua.pushnumber(l, sum / n); /* push the average */
+		Lua.pushnumber(l, sum); /* push the sum */
 
-		/* push the sum */
-		Lua.pushnumber(l, sum);
-
-		/* return the number of results */
-		return 2;
+		return 2; /* return the number of results */
 	}
 }
