@@ -32,7 +32,10 @@ typedef Lua_Unsigned = cpp.UInt64;
 @:buildXml('<include name="${haxelib:hxlua}/project/Build.xml" />')
 @:include('lua.hpp')
 @:native('lua_KContext')
-extern class Lua_KContext {}
+@:scalar
+@:coreType
+@:notNull
+extern abstract Lua_KContext from Int to Int {}
 
 /*
  * Type for C functions registered with Lua.
@@ -77,7 +80,7 @@ typedef Lua_Hook = cpp.Callable<(L:cpp.RawPointer<Lua_State>, ar:cpp.RawPointer<
 extern class Lua_Debug
 {
 	@:native('lua_Debug')
-	static function create():Lua_Debug;
+	static function alloc():Lua_Debug;
 
 	var event:Int;
 	var name:cpp.ConstCharStar; /* (n) */
@@ -93,7 +96,7 @@ extern class Lua_Debug
 	var istailcall:cpp.Char; /* (t) */
 	var ftransfer:cpp.UInt16; /* (r) index of first value transferred */
 	var ntransfer:cpp.UInt16; /* (r) number of transferred values */
-	var short_src:cpp.Char; /* (S) max size is LUA_IDSIZE */
+	var short_src:cpp.CharStar; /* (S) max size is LUA_IDSIZE */
 }
 
 @:buildXml('<include name="${haxelib:hxlua}/project/Build.xml" />')
@@ -104,7 +107,7 @@ extern class Lua_Debug
 extern class LuaL_Buffer
 {
 	@:native('luaL_Buffer')
-	static function create():LuaL_Buffer;
+	static function alloc():LuaL_Buffer;
 
 	var b:cpp.ConstCharStar;
 	var size:cpp.SizeT;
@@ -120,7 +123,7 @@ extern class LuaL_Buffer
 extern class LuaL_Reg
 {
 	@:native('luaL_Reg')
-	static function create():LuaL_Reg;
+	static function alloc():LuaL_Reg;
 
 	var name:cpp.ConstCharStar;
 	var func:Lua_CFunction;

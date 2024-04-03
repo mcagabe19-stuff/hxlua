@@ -106,6 +106,12 @@ extern class Lua
 	@:native('LUA_MINSTACK')
 	static var MINSTACK:Int;
 
+	@:native('LUA_MAXCAPTURES')
+	static var MAXCAPTURES:Int;
+
+	@:native('LUA_IDSIZE')
+	static var IDSIZE:Int;
+
 	/* predefined values in the registry */
 	@:native('LUA_RIDX_MAINTHREAD')
 	static var RIDX_MAINTHREAD:Int;
@@ -134,33 +140,6 @@ extern class Lua
 
 	@:native('::String(LUA_VERSUFFIX)')
 	static var VERSUFFIX:String;
-
-	@:native('::String(LUA_COLIBNAME)')
-	static var COLIBNAME:String;
-
-	@:native('::String(LUA_TABLIBNAME)')
-	static var TABLIBNAME:String;
-
-	@:native('::String(LUA_IOLIBNAME)')
-	static var IOLIBNAME:String;
-
-	@:native('::String(LUA_OSLIBNAME)')
-	static var OSLIBNAME:String;
-
-	@:native('::String(LUA_STRLIBNAME)')
-	static var STRLIBNAME:String;
-
-	@:native('::String(LUA_UTF8LIBNAME)')
-	static var UTF8LIBNAME:String;
-
-	@:native('::String(LUA_MATHLIBNAME)')
-	static var MATHLIBNAME:String;
-
-	@:native('::String(LUA_DBLIBNAME)')
-	static var DBLIBNAME:String;
-
-	@:native('::String(LUA_LOADLIBNAME)')
-	static var LOADLIBNAME:String;
 
 	/*
 	 * state manipulation
@@ -443,10 +422,10 @@ extern class Lua
 	 * 'load' and 'call' functions (load and run Lua code)
 	 */
 	@:native('lua_callk')
-	static function callk(L:cpp.RawPointer<Lua_State>, nargs:Int, nresults:Int, ctx:Lua_KContext, k:Lua_KFunction):Int;
+	static function callk(L:cpp.RawPointer<Lua_State>, nargs:Int, nresults:Int, ctx:Lua_KContext, k:Lua_KFunction):Void;
 
 	@:native('lua_call')
-	static function call(L:cpp.RawPointer<Lua_State>, nargs:Int, nresults:Int):Int;
+	static function call(L:cpp.RawPointer<Lua_State>, nargs:Int, nresults:Int):Void;
 
 	@:native('lua_pcallk')
 	static function pcallk(L:cpp.RawPointer<Lua_State>, nargs:Int, nresults:Int, errfunc:Int, ctx:Lua_KContext, k:Lua_KFunction):Int;
@@ -722,4 +701,31 @@ extern class Lua
 
 	@:native('::String(LUA_FILEHANDLE)')
 	static var FILEHANDLE:String;
+
+	@:native('::String(LUA_COLIBNAME)')
+	static var COLIBNAME:String;
+
+	@:native('::String(LUA_TABLIBNAME)')
+	static var TABLIBNAME:String;
+
+	@:native('::String(LUA_IOLIBNAME)')
+	static var IOLIBNAME:String;
+
+	@:native('::String(LUA_OSLIBNAME)')
+	static var OSLIBNAME:String;
+
+	@:native('::String(LUA_STRLIBNAME)')
+	static var STRLIBNAME:String;
+
+	@:native('::String(LUA_UTF8LIBNAME)')
+	static var UTF8LIBNAME:String;
+
+	@:native('::String(LUA_MATHLIBNAME)')
+	static var MATHLIBNAME:String;
+
+	@:native('::String(LUA_DBLIBNAME)')
+	static var DBLIBNAME:String;
+
+	@:native('::String(LUA_LOADLIBNAME)')
+	static var LOADLIBNAME:String;
 }
